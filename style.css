@@ -1,0 +1,426 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+  background: #000;
+  color: white;
+  overflow: hidden;
+}
+
+/* Top navigation */
+.top-nav {
+  position: absolute;
+  top: 70px;              /* moved further down */
+  right: 200px;
+  display: flex;
+  gap: 25px;
+  z-index: 10;
+}
+
+.top-nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 12px;        /* smaller font */
+  letter-spacing: 1.5px;
+  font-weight: 400;
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 5;
+}
+
+.slide video,
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 20%;
+  left: 10%;
+}
+
+.overlay h1 {
+  font-size: 100px;
+  font-weight: bold;
+  line-height: 0.9;
+}
+
+.overlay p {
+  margin-top: 20px;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+/* Slide navigation */
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;      /* remove background */
+  border: none;          /* remove border */
+  color: white;          /* arrow color */
+  font-size: 10px;       /* bigger arrows */
+  cursor: pointer;
+  z-index: 20;
+  transition: color 0.3s, transform 0.2s;
+}
+
+.nav:hover {
+  color: #f39c12;        /* gold on hover */
+  transform: translateY(-50%) scale(1.2);
+}
+
+.nav.prev {
+  left: 30px;   /* stick to left */
+}
+
+.nav.next {
+  right: 30px;  /* stick to right */
+}
+
+
+
+/* Footer section */
+footer {
+  position: absolute;
+  bottom: 20px;
+  left: 40px;
+  right: 40px;                  /* stretch footer across */
+  display: flex;
+  justify-content: space-between;  /* pushes left + right apart */
+  align-items: center;
+  z-index: 10;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* Social icons on the right */
+.socials {
+  display: flex;
+  gap: 15px;
+}
+
+.socials a {
+  color: white;
+  font-size: 14px;     /* matches nav size */
+  transition: color 0.3s;
+}
+
+.socials a:hover {
+  color: #f39c12;
+}
+
+nav a {
+  position: relative;
+  text-decoration: none;
+  color: white; /* adjust to your design */
+  
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+/* underline effect */
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;  /* distance below text */
+  width: 0%;
+  height: 2px;
+  background: white; /* underline color */
+  transition: width 0.3s ease;
+}
+
+/* expand underline on hover */
+nav a:hover::after {
+  width: 100%;
+}
+/* Mobile & Tablet styles */
+@media (max-width: 768px) {
+  body, html {
+    overflow: auto; /* allow scrolling on small screens */
+  }
+
+  /* Top navigation */
+  .top-nav {
+    top: 20px;         /* closer to top */
+    right: 20px;       /* less margin */
+    gap: 15px;
+  }
+
+  .top-nav a {
+    font-size: 10px;   /* smaller font */
+    letter-spacing: 1px;
+  }
+
+  /* Overlay text */
+  .overlay {
+    bottom: 15%;
+    left: 5%;
+    right: 5%;         /* keep text inside screen */
+    text-align: center;
+  }
+
+  .overlay h1 {
+    font-size: 40px;   /* smaller heading */
+    line-height: 1;
+  }
+
+  .overlay p {
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-top: 10px;
+  }
+
+  /* Slide navigation arrows */
+  .nav {
+    font-size: 18px;   /* larger so touch-friendly */
+  }
+
+  .nav.prev {
+    left: 10px;
+  }
+
+  .nav.next {
+    right: 10px;
+  }
+
+  /* Footer */
+  footer {
+    flex-direction: column;   /* stack vertically */
+    gap: 10px;
+    bottom: 10px;
+    left: 20px;
+    right: 20px;
+    text-align: center;
+  }
+
+  footer a {
+    font-size: 12px;
+  }
+
+  .socials {
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .socials a {
+    font-size: 16px; /* a bit bigger for touch */
+  }
+}
+/* Mobile & Tablet Styles */
+@media (max-width: 768px) {
+  body, html {
+    overflow: auto; /* allow scrolling */
+  }
+
+  /* Navigation */
+  .top-nav {
+    top: 15px;
+    right: 15px;
+    gap: 12px;
+  }
+
+  .top-nav a {
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  /* Overlay text */
+  .overlay {
+    bottom: 10%;
+    left: 5%;
+    right: 5%;
+    text-align: center;
+  }
+
+  .overlay h1 {
+    font-size: 36px;
+    line-height: 1.1;
+  }
+
+  .overlay p {
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  /* Slider arrows */
+  .nav {
+    font-size: 20px; /* larger for touch */
+  }
+  .nav.prev { left: 10px; }
+  .nav.next { right: 10px; }
+
+  /* Footer */
+  footer {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+    bottom: 10px;
+    left: 15px;
+    right: 15px;
+  }
+  footer a {
+    font-size: 12px;
+  }
+  .socials {
+    justify-content: center;
+    gap: 12px;
+  }
+  .socials a {
+    font-size: 16px;
+  }
+
+  /* Chatbox */
+  .chat-box {
+    width: 90%;
+    right: 5%;
+    bottom: 10px;
+  }
+  .chat-body {
+    height: 180px;
+  }
+  .chat-footer input {
+    font-size: 14px;
+  }
+  .chat-footer button {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+}
+/* Mobile & Tablet */
+@media (max-width: 768px) {
+  body {
+    overflow: auto; /* allow scroll if needed */
+  }
+
+  .container {
+    flex-direction: column;   /* stack vertically */
+    height: auto;
+  }
+
+  /* Left section (card) */
+  .left {
+    flex: none;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card {
+    width: 90%;        /* full width on mobile */
+    max-width: 400px;
+    font-size: 16px;
+    padding: 20px;
+  }
+
+  .card h2 {
+    font-size: 14px;
+  }
+  .card h1 {
+    font-size: 22px;
+  }
+
+  /* Right section (designer text) */
+  .right {
+    flex: none;
+    font-size: 18px;
+    padding: 20px;
+    text-align: center;
+  }
+}
+/* Mobile & Tablet */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+    height: auto;
+    overflow: auto; /* allow scroll */
+  }
+
+  video {
+    object-position: center;
+  }
+
+  .overlay {
+    width: 90%;
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .overlay h1 {
+    font-size: 22px;
+  }
+
+  .overlay p {
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: justify; /* cleaner for mobile */
+  }
+}
+@media(max-width: 500px) {
+  .contact-section {
+    padding: 20px 10px;
+    gap: 20px;
+  }
+
+  .contact-info, .contact-form {
+    padding: 20px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 14px;
+  }
+
+  .contact-form button {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
+@media(max-width: 400px) {
+  .contact-section {
+    padding: 15px 5px;
+    gap: 15px;
+  }
+
+  .contact-info, .contact-form {
+    padding: 15px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 12px;
+  }
+
+  .contact-form button {
+    font-size: 12px;
+    padding: 10px;
+  }
+}

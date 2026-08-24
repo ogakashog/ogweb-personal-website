@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+  <title>About — WEBOG</title>
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="media/webog logo.png">
+
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    body {
+
+      width: 100%;
+      height: 100vh;
+
+      overflow: hidden;
+
+      background: #050505;
+
+      color: white;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+    }
+
+
+    /* =====================================
+       VIDEO
+    ===================================== */
+
+    .background-video {
+
+      position: fixed;
+
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      z-index: -5;
+
+      filter:
+        brightness(0.42)
+        contrast(1.05);
+    }
+
+
+    /* =====================================
+       DARK OVERLAY
+    ===================================== */
+
+    .overlay {
+
+      position: fixed;
+
+      inset: 0;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(0,0,0,0.75),
+          rgba(0,0,0,0.2),
+          rgba(0,0,0,0.65)
+        );
+
+      z-index: -4;
+    }
+
+
+    /* =====================================
+       GRAIN
+    ===================================== */
+
+    .grain {
+
+      position: fixed;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: 0.08;
+
+      z-index: 20;
+
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+    }
+
+
+    /* =====================================
+       MAIN
+    ===================================== */
+
+    .page {
+
+      width: 100%;
+      height: 100vh;
+
+      display: grid;
+
+      grid-template-columns:
+        45% 55%;
+    }
+
+
+    /* =====================================
+       LEFT
+    ===================================== */
+
+    .left {
+
+      height: 100%;
+
+      padding: 45px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content:
+        space-between;
+
+      border-right:
+        1px solid
+        rgba(255,255,255,0.12);
+    }
+
+
+    /* =====================================
+       BRAND
+    ===================================== */
+
+    .brand {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+    }
+
+
+    .brand img {
+
+      width: 42px;
+      height: 42px;
+
+      object-fit: contain;
+    }
+
+
+    .brand span {
+
+      font-size: 12px;
+
+      letter-spacing: 5px;
+
+      color:
+        rgba(255,255,255,0.7);
+    }
+
+
+    /* =====================================
+       BIG OG
+    ===================================== */
+
+    .hero-name {
+
+      position: relative;
+    }
+
+
+    .small-title {
+
+      font-size: 10px;
+
+      letter-spacing: 5px;
+
+      color:
+        rgba(255,255,255,0.45);
+
+      margin-bottom: 18px;
+
+      text-transform:
+        uppercase;
+    }
+
+
+    .hero-name h1 {
+
+      font-size:
+        clamp(120px, 18vw, 260px);
+
+      line-height: 0.72;
+
+      font-weight: 700;
+
+      letter-spacing:
+        -15px;
+
+      margin-left: -15px;
+
+      color:
+        rgba(255,255,255,0.92);
+
+      text-shadow:
+        0 0 50px
+        rgba(255,255,255,0.08);
+    }
+
+
+    .hero-name h1 span {
+
+      color:
+        rgba(255,255,255,0.18);
+    }
+
+
+    /* =====================================
+       BOTTOM LEFT
+    ===================================== */
+
+    .left-bottom {
+
+      display: flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        flex-end;
+    }
+
+
+    .location {
+
+      font-size: 10px;
+
+      letter-spacing: 2px;
+
+      line-height: 1.7;
+
+      color:
+        rgba(255,255,255,0.45);
+    }
+
+
+    .scroll {
+
+      font-size: 9px;
+
+      letter-spacing: 3px;
+
+      color:
+        rgba(255,255,255,0.4);
+
+      writing-mode:
+        vertical-rl;
+    }
+
+
+    /* =====================================
+       RIGHT
+    ===================================== */
+
+    .right {
+
+      height: 100%;
+
+      padding: 45px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content:
+        space-between;
+    }
+
+
+    /* =====================================
+       TOP
+    ===================================== */
+
+    .top-info {
+
+      display: flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+    }
+
+
+    .about-label {
+
+      font-size: 10px;
+
+      letter-spacing: 4px;
+
+      color:
+        rgba(255,255,255,0.5);
+    }
+
+
+    .available {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      font-size: 9px;
+
+      letter-spacing: 2px;
+
+      color:
+        rgba(255,255,255,0.55);
+    }
+
+
+    .available-dot {
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: #45ff87;
+
+      box-shadow:
+        0 0 10px
+        rgba(69,255,135,0.8);
+
+      animation:
+        pulse 1.5s infinite;
+    }
+
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+
+        opacity: 0.4;
+
+        transform:
+          scale(0.8);
+      }
+
+      50% {
+
+        opacity: 1;
+
+        transform:
+          scale(1.2);
+      }
+
+    }
+
+
+    /* =====================================
+       INTRO
+    ===================================== */
+
+    .intro {
+
+      max-width: 650px;
+
+      margin-left: auto;
+    }
+
+
+    .intro-number {
+
+      font-size: 10px;
+
+      letter-spacing: 4px;
+
+      color:
+        rgba(255,255,255,0.35);
+
+      margin-bottom: 20px;
+    }
+
+
+    .intro h2 {
+
+      font-size:
+        clamp(38px, 5vw, 72px);
+
+      line-height: 0.98;
+
+      font-weight: 400;
+
+      letter-spacing: -3px;
+
+      margin-bottom: 30px;
+    }
+
+
+    .intro h2 span {
+
+      color:
+        rgba(255,255,255,0.38);
+    }
+
+
+    .intro p {
+
+      max-width: 540px;
+
+      font-size: 14px;
+
+      line-height: 1.9;
+
+      color:
+        rgba(255,255,255,0.58);
+    }
+
+
+    .intro p strong {
+
+      color: white;
+
+      font-weight: 400;
+    }
+
+
+    /* =====================================
+       SKILLS
+    ===================================== */
+
+    .skills {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 8px;
+
+      margin-top: 28px;
+    }
+
+
+    .skill {
+
+      padding:
+        8px 12px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.13);
+
+      border-radius: 50px;
+
+      color:
+        rgba(255,255,255,0.5);
+
+      font-size: 9px;
+
+      letter-spacing: 1px;
+
+      background:
+        rgba(255,255,255,0.025);
+
+      transition:
+        0.3s ease;
+    }
+
+
+    .skill:hover {
+
+      color: white;
+
+      border-color:
+        rgba(255,255,255,0.4);
+
+      background:
+        rgba(255,255,255,0.08);
+    }
+
+
+    /* =====================================
+       FOOTER
+    ===================================== */
+
+    .footer {
+
+      display: flex;
+
+      align-items:
+        flex-end;
+
+      justify-content:
+        space-between;
+
+      padding-top: 20px;
+
+      border-top:
+        1px solid
+        rgba(255,255,255,0.1);
+    }
+
+
+    .quote {
+
+      font-size: 11px;
+
+      letter-spacing: 1px;
+
+      color:
+        rgba(255,255,255,0.35);
+    }
+
+
+    .quote span {
+
+      color:
+        rgba(255,255,255,0.8);
+    }
+
+
+    .year {
+
+      font-size: 9px;
+
+      letter-spacing: 3px;
+
+      color:
+        rgba(255,255,255,0.25);
+    }
+
+
+    /* =====================================
+       RESPONSIVE
+    ===================================== */
+
+    @media (max-width: 850px) {
+
+      body {
+
+        overflow: auto;
+      }
+
+
+      .page {
+
+        height: auto;
+
+        min-height: 100vh;
+
+        grid-template-columns: 1fr;
+      }
+
+
+      .left {
+
+        min-height: 50vh;
+
+        padding: 30px;
+
+        border-right: none;
+
+        border-bottom:
+          1px solid
+          rgba(255,255,255,0.12);
+      }
+
+
+      .right {
+
+        min-height: 50vh;
+
+        padding: 30px;
+      }
+
+
+      .hero-name h1 {
+
+        font-size: 130px;
+
+        letter-spacing: -8px;
+      }
+
+
+      .intro {
+
+        margin-left: 0;
+      }
+
+    }
+
+
+    @media (max-width: 500px) {
+
+      .left,
+      .right {
+
+        padding: 24px;
+      }
+
+
+      .hero-name h1 {
+
+        font-size: 100px;
+
+        letter-spacing: -6px;
+      }
+
+
+      .intro h2 {
+
+        font-size: 40px;
+
+        letter-spacing: -2px;
+      }
+
+
+      .intro p {
+
+        font-size: 13px;
+      }
+
+
+      .left-bottom {
+
+        margin-top: 30px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =====================================
+       VIDEO BACKGROUND
+  ===================================== -->
+
+  <video
+    class="background-video"
+    src="media/slide3.mp4"
+    autoplay
+    muted
+    loop
+    playsinline>
+  </video>
+
+
+  <div class="overlay"></div>
+
+  <div class="grain"></div>
+
+
+  <!-- =====================================
+       PAGE
+  ===================================== -->
+
+  <main class="page">
+
+
+    <!-- ===================================
+         LEFT SIDE
+    ==================================== -->
+
+    <section class="left">
+
+
+      <!-- BRAND -->
+
+      <div class="brand">
+
+        <img
+          src="media/webog logo.png"
+          alt="WEBOG">
+
+        <span>
+          WEBOG
+        </span>
+
+      </div>
+
+
+      <!-- BIG NAME -->
+
+      <div class="hero-name">
+
+        <div class="small-title">
+
+          DESIGN / CODE / CREATE
+
+        </div>
+
+        <h1>
+
+          O<span>G</span>
+
+        </h1>
+
+      </div>
+
+
+      <!-- BOTTOM -->
+
+      <div class="left-bottom">
+
+        <div class="location">
+
+          CREATIVE DEVELOPER<br>
+
+          DIGITAL EXPERIENCES<br>
+
+          WEB / APPS / SYSTEMS
+
+        </div>
+
+
+        <div class="scroll">
+
+          ABOUT / 01
+
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- ===================================
+         RIGHT SIDE
+    ==================================== -->
+
+    <section class="right">
+
+
+      <!-- TOP -->
+
+      <div class="top-info">
+
+        <div class="about-label">
+
+          ABOUT
+
+        </div>
+
+
+        <div class="available">
+
+          <span
+            class="available-dot">
+          </span>
+
+          AVAILABLE
+
+        </div>
+
+      </div>
+
+
+
+      <!-- INTRO -->
+
+      <div class="intro">
+
+
+        <div class="intro-number">
+
+          01 — WHO I AM
+
+        </div>
+
+
+        <h2>
+
+          Turning
+          <span>ideas</span>
+          into
+
+          <br>
+
+          digital
+          experiences.
+
+        </h2>
+
+
+        <p>
+
+          I'm <strong>OG</strong>, a creative developer
+          who enjoys building things from the ground up.
+
+          <br><br>
+
+          I work across
+          <strong>websites, applications,
+          interfaces and digital products</strong> —
+          combining clean code with thoughtful design.
+
+          <br><br>
+
+          I don't just want things to work.
+          I want them to <strong>feel right.</strong>
+
+        </p>
+
+
+        <!-- SKILLS -->
+
+        <div class="skills">
+
+          <span class="skill">
+            WEB
+          </span>
+
+          <span class="skill">
+            APPS
+          </span>
+
+          <span class="skill">
+            FULL STACK
+          </span>
+
+          <span class="skill">
+            UI / UX
+          </span>
+
+          <span class="skill">
+            JAVASCRIPT
+          </span>
+
+          <span class="skill">
+            NODE.JS
+          </span>
+
+          <span class="skill">
+            FLUTTER
+          </span>
+
+          <span class="skill">
+            DATABASES
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+
+      <!-- FOOTER -->
+
+      <div class="footer">
+
+        <div class="quote">
+
+          <span>“</span>
+          Build something worth remembering.
+          <span>”</span>
+
+        </div>
+
+
+        <div class="year">
+
+          © 2026 WEBOG
+
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+  </main>
+
+
+</body>
+
+</html>

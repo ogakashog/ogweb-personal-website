@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+  <title>WEBOG-WORKS</title>
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="media/webog logo.png">
+
+
+  <style>
+
+    /* =================================
+       RESET
+    ================================= */
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    /* =================================
+       BODY
+    ================================= */
+
+    body {
+
+      margin: 0;
+      padding: 0;
+
+      width: 100%;
+      height: 100vh;
+
+      overflow: hidden;
+
+      font-family: Arial, sans-serif;
+
+      background: #000;
+    }
+
+
+    /* =================================
+       VIDEO BACKGROUND
+    ================================= */
+
+    video {
+
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      z-index: -2;
+    }
+
+
+    /* =================================
+       VIDEO OVERLAY
+    ================================= */
+
+    .video-overlay {
+
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 100%;
+
+      background: rgba(0, 0, 0, 0.18);
+
+      z-index: -1;
+    }
+
+
+    /* =================================
+       MAIN CONTAINER
+    ================================= */
+
+    .container {
+
+      width: 100%;
+      height: 100vh;
+
+      display: flex;
+
+      position: relative;
+
+      z-index: 1;
+    }
+
+
+    /* =================================
+       PROJECT SIDE - 60%
+    ================================= */
+
+    .left {
+
+      width: 60%;
+      height: 100%;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+      align-items: center;
+
+      padding: 40px;
+    }
+
+
+    /* =================================
+       WEBOG SIDE - 40%
+    ================================= */
+
+    .right {
+
+      width: 40%;
+      height: 100%;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      color: #ffffff;
+
+      text-align: center;
+    }
+
+
+    /* =================================
+       WEBOG BRANDING
+    ================================= */
+
+    .branding {
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-align: center;
+
+      user-select: none;
+    }
+
+
+    /* =================================
+       WEBOG LOGO
+    ================================= */
+
+    .brand-logo {
+
+      width: 100px;
+
+      height: 100px;
+
+      object-fit: contain;
+
+      margin-bottom: 20px;
+
+      filter:
+        drop-shadow(
+          0 0 10px rgba(255, 255, 255, 0.35)
+        );
+
+      animation:
+        logoFloat 3s ease-in-out infinite;
+    }
+
+
+    /* =================================
+       POWERED BY
+    ================================= */
+
+    .powered-text {
+
+      color:
+        rgba(255, 255, 255, 0.75);
+
+      font-size: 14px;
+
+      letter-spacing: 4px;
+
+      margin-bottom: 6px;
+
+      text-transform: lowercase;
+
+      animation:
+        softFade 2.5s ease-in-out infinite;
+    }
+
+
+    /* =================================
+       WEBOG TEXT
+    ================================= */
+
+    .webog-text {
+
+      font-size: 50px;
+
+      font-weight: 600;
+
+      letter-spacing: 7px;
+
+      color: #ffffff;
+
+      text-transform: lowercase;
+
+      text-shadow:
+        0 0 5px rgba(255, 255, 255, 0.45),
+        0 0 15px rgba(255, 255, 255, 0.3),
+        0 0 30px rgba(255, 255, 255, 0.15);
+
+      animation:
+        webogGlow 2s ease-in-out infinite;
+    }
+
+
+    /* =================================
+       LOGO FLOAT
+    ================================= */
+
+    @keyframes logoFloat {
+
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+
+    }
+
+
+    /* =================================
+       WEBOG GLOW
+    ================================= */
+
+    @keyframes webogGlow {
+
+      0% {
+
+        opacity: 0.65;
+
+        text-shadow:
+          0 0 5px rgba(255, 255, 255, 0.25),
+          0 0 10px rgba(255, 255, 255, 0.15);
+
+      }
+
+      50% {
+
+        opacity: 1;
+
+        text-shadow:
+          0 0 8px rgba(255, 255, 255, 0.8),
+          0 0 20px rgba(255, 255, 255, 0.6),
+          0 0 40px rgba(255, 255, 255, 0.35);
+
+      }
+
+      100% {
+
+        opacity: 0.65;
+
+        text-shadow:
+          0 0 5px rgba(255, 255, 255, 0.25),
+          0 0 10px rgba(255, 255, 255, 0.15);
+
+      }
+
+    }
+
+
+    /* =================================
+       POWERED BY FADE
+    ================================= */
+
+    @keyframes softFade {
+
+      0% {
+        opacity: 0.55;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0.55;
+      }
+
+    }
+
+
+    /* =================================
+       TABS
+    ================================= */
+
+    .tabs {
+
+      display: flex;
+
+      gap: 35px;
+
+      margin-bottom: 30px;
+
+      align-self: flex-start;
+
+      margin-left: 5%;
+    }
+
+
+    /* =================================
+       TAB
+    ================================= */
+
+    .tab {
+
+      border: none;
+
+      background: transparent;
+
+      color: #ffffff;
+
+      font-size: 20px;
+
+      cursor: pointer;
+
+      padding: 0 0 8px 0;
+
+      position: relative;
+
+      opacity: 0.7;
+
+      transition: 0.25s ease;
+    }
+
+
+    .tab:hover {
+
+      opacity: 1;
+    }
+
+
+    /* =================================
+       ACTIVE TAB
+    ================================= */
+
+    .tab.active {
+
+      opacity: 1;
+    }
+
+
+    .tab.active::after {
+
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+
+      bottom: 0;
+
+      width: 100%;
+
+      height: 4px;
+
+      background: #ffffff;
+
+      border-radius: 10px;
+    }
+
+
+    /* =================================
+       PROJECT GRID
+    ================================= */
+
+    .projects {
+
+      width: 100%;
+
+      max-width: 800px;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 18px;
+
+      max-height: 65vh;
+
+      overflow-y: auto;
+
+      padding: 5px 10px 15px 10px;
+
+      scrollbar-width: none;
+    }
+
+
+    .projects::-webkit-scrollbar {
+
+      display: none;
+    }
+
+
+    /* =================================
+       GLASS PROJECT CARD
+    ================================= */
+
+    .project-card {
+
+      position: relative;
+
+      background:
+        rgba(255, 255, 255, 0.03);
+
+      border:
+        1px solid rgba(255, 255, 255, 0.18);
+
+      color: #ffffff;
+
+      border-radius: 14px;
+
+      padding: 18px;
+
+      min-height: 175px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-align: center;
+
+      cursor: pointer;
+
+      text-decoration: none;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.15);
+
+      transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+
+      animation:
+        cardAppear 0.35s ease;
+    }
+
+
+    /* =================================
+       CARD HOVER
+    ================================= */
+
+    .project-card:hover {
+
+      background:
+        rgba(255, 255, 255, 0.07);
+
+      border-color:
+        rgba(255, 255, 255, 0.35);
+
+      transform:
+        translateY(-5px);
+
+      box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.25);
+    }
+
+
+    /* =================================
+       PROJECT LOGO
+    ================================= */
+
+    .project-logo {
+
+      width: 60px;
+
+      height: 60px;
+
+      object-fit: cover;
+
+      border-radius: 15px;
+
+      margin-bottom: 12px;
+
+      border:
+        1px solid rgba(255, 255, 255, 0.25);
+
+      background:
+        rgba(255, 255, 255, 0.08);
+
+      box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+
+    /* =================================
+       PLAY STORE ICON
+       TOP LEFT
+    ================================= */
+
+    .play-store-badge {
+
+      position: absolute;
+
+      top: 11px;
+      left: 11px;
+
+      width: 45px;
+      height: 45px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      opacity: 0.85;
+
+      transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+
+      z-index: 5;
+    }
+
+
+    .play-store-badge img {
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: contain;
+
+      filter:
+        drop-shadow(
+          0 2px 5px rgba(0, 0, 0, 0.35)
+        );
+    }
+
+
+    .project-card:hover
+    .play-store-badge {
+
+      opacity: 1;
+
+      transform:
+        scale(1.12);
+    }
+
+
+    /* =================================
+       LIVE BADGE
+       TOP LEFT
+    ================================= */
+
+    .live-badge {
+
+      position: absolute;
+
+      top: 11px;
+      left: 11px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      padding:
+        4px 8px;
+
+      border-radius: 20px;
+
+      background:
+        rgba(255, 0, 0, 0.12);
+
+      border:
+        1px solid rgba(255, 70, 70, 0.45);
+
+      color:
+        #ff3b3b;
+
+      font-size: 9px;
+
+      font-weight: bold;
+
+      letter-spacing: 1px;
+
+      text-transform: uppercase;
+
+      box-shadow:
+        0 0 8px rgba(255, 0, 0, 0.12);
+
+      z-index: 5;
+    }
+
+
+    /* =================================
+       LIVE DOT
+    ================================= */
+
+    .live-dot {
+
+      width: 6px;
+
+      height: 6px;
+
+      border-radius: 50%;
+
+      background:
+        #ff2020;
+
+      box-shadow:
+        0 0 6px rgba(255, 0, 0, 0.8);
+
+      animation:
+        livePulse 1.3s ease-in-out infinite;
+    }
+
+
+    @keyframes livePulse {
+
+      0% {
+
+        opacity: 0.45;
+
+        transform:
+          scale(0.85);
+      }
+
+      50% {
+
+        opacity: 1;
+
+        transform:
+          scale(1.15);
+      }
+
+      100% {
+
+        opacity: 0.45;
+
+        transform:
+          scale(0.85);
+      }
+
+    }
+
+
+    /* =================================
+       PROJECT NUMBER
+    ================================= */
+
+    .project-number {
+
+      font-size: 11px;
+
+      color:
+        rgba(255, 255, 255, 0.55);
+
+      margin-bottom: 6px;
+    }
+
+
+    /* =================================
+       PROJECT TITLE
+    ================================= */
+
+    .project-card h2 {
+
+      margin: 0;
+
+      font-size: 18px;
+
+      font-weight: bold;
+
+      line-height: 1.2;
+
+      color: #ffffff;
+    }
+
+
+    /* =================================
+       PROJECT DESCRIPTION
+    ================================= */
+
+    .project-card p {
+
+      margin: 8px 0 0;
+
+      font-size: 12px;
+
+      line-height: 1.4;
+
+      color:
+        rgba(255, 255, 255, 0.65);
+    }
+
+
+    /* =================================
+       CARD ANIMATION
+    ================================= */
+
+    @keyframes cardAppear {
+
+      from {
+
+        opacity: 0;
+
+        transform:
+          translateY(15px);
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform:
+          translateY(0);
+      }
+
+    }
+
+
+    /* =================================
+       TABLET
+    ================================= */
+
+    @media (max-width: 1100px) {
+
+      .projects {
+
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+
+      .webog-text {
+
+        font-size: 40px;
+      }
+
+
+      .brand-logo {
+
+        width: 85px;
+
+        height: 85px;
+      }
+
+    }
+
+
+    /* =================================
+       MOBILE
+    ================================= */
+
+    @media (max-width: 700px) {
+
+      body {
+
+        overflow: auto;
+      }
+
+
+      .container {
+
+        height: auto;
+
+        min-height: 100vh;
+
+        flex-direction: column;
+      }
+
+
+      .left {
+
+        width: 100%;
+
+        min-height: 70vh;
+
+        padding:
+          90px 20px 30px;
+      }
+
+
+      .right {
+
+        width: 100%;
+
+        min-height: 30vh;
+
+        padding-bottom: 40px;
+      }
+
+
+      .tabs {
+
+        align-self: center;
+
+        margin-left: 0;
+
+        margin-bottom: 25px;
+      }
+
+
+      .projects {
+
+        max-width: 700px;
+
+        grid-template-columns:
+          repeat(2, 1fr);
+
+        max-height: none;
+      }
+
+
+      .webog-text {
+
+        font-size: 32px;
+
+        letter-spacing: 5px;
+      }
+
+
+      .brand-logo {
+
+        width: 75px;
+
+        height: 75px;
+
+        margin-bottom: 15px;
+      }
+
+    }
+
+
+    /* =================================
+       SMALL MOBILE
+    ================================= */
+
+    @media (max-width: 500px) {
+
+      .projects {
+
+        grid-template-columns:
+          repeat(1, 1fr);
+
+        width: 90%;
+      }
+
+
+      .project-card {
+
+        min-height: 150px;
+      }
+
+
+      .tab {
+
+        font-size: 17px;
+      }
+
+
+      .tabs {
+
+        gap: 25px;
+      }
+
+
+      .powered-text {
+
+        font-size: 12px;
+
+        letter-spacing: 3px;
+      }
+
+
+      .webog-text {
+
+        font-size: 28px;
+
+        letter-spacing: 4px;
+      }
+
+
+      .live-badge {
+
+        top: 9px;
+
+        left: 9px;
+
+        font-size: 8px;
+
+        padding:
+          3px 7px;
+      }
+
+
+      .play-store-badge {
+
+        top: 9px;
+
+        left: 9px;
+
+        width: 22px;
+
+        height: 22px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =================================
+       VIDEO BACKGROUND
+  ================================= -->
+
+  <video
+    src="media/slide1.mp4"
+    autoplay
+    loop
+    muted
+    playsinline>
+  </video>
+
+
+  <div class="video-overlay"></div>
+
+
+  <!-- =================================
+       MAIN CONTAINER
+  ================================= -->
+
+  <div class="container">
+
+
+    <!-- =================================
+         LEFT PROJECT SIDE - 60%
+    ================================= -->
+
+    <div class="left">
+
+
+      <!-- TABS -->
+
+      <div class="tabs">
+
+        <button
+          class="tab active"
+          id="appsTab"
+          onclick="showProjects('apps')">
+
+          apps
+
+        </button>
+
+
+        <button
+          class="tab"
+          id="websitesTab"
+          onclick="showProjects('websites')">
+
+          websites
+
+        </button>
+
+      </div>
+
+
+      <!-- PROJECT GRID -->
+
+      <div
+        class="projects"
+        id="projects">
+      </div>
+
+
+    </div>
+
+
+    <!-- =================================
+         RIGHT WEBOG SIDE - 40%
+    ================================= -->
+
+    <div class="right">
+
+      <div class="branding">
+
+
+        <!-- WEBOG LOGO -->
+
+        <img
+          src="media/webog logo.png"
+          alt="WEBOG Logo"
+          class="brand-logo">
+
+
+        <!-- POWERED BY -->
+
+        <div class="powered-text">
+          powered by
+        </div>
+
+
+        <!-- WEBOG -->
+
+        <div class="webog-text">
+          webog
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+
+  <script>
+
+
+    /* =================================
+       APP PROJECTS
+    ================================= */
+
+    const apps = [
+
+      {
+        name: "PageO",
+
+        description:
+          "A modern reading application.",
+
+        logo:
+          "media/pageo.png",
+
+        playStore:
+          "media/playstore.png",
+
+        link:
+          "#"
+      },
+
+
+      {
+        name: "Float Note",
+
+        description:
+          "A simple floating notes application.",
+
+        logo:
+          "media/floatnote.png",
+
+        playStore:
+          "media/playstore.png",
+
+        link:
+          "#"
+      },
+
+
+      {
+        name: "MoneyMindo",
+
+        description:
+          "A personal expense tracking application.",
+
+        logo:
+          "media/moneymindo.png",
+
+        link:
+          "https://moneymindo.web.app/"
+      }
+
+    ];
+
+
+    /* =================================
+       WEBSITE PROJECTS
+    ================================= */
+
+    const websites = [
+
+      {
+        name: "MSR WELDING",
+
+        description:
+          "Professional welding service website.",
+
+        logo:
+          "media/msr weldings.png",
+
+        live: true,
+
+        link:
+          "https://msrwelding.netlify.app/"
+      },
+
+
+      {
+        name: "FLX",
+
+        description:
+          "A custom website project.",
+
+        logo:
+          "media/flyx.png",
+
+        live: true,
+
+        link:
+          "https://fly-x-web.web.app/"
+      },
+
+
+      {
+        name: "FLY REMOTE",
+
+        description:
+          "A remote work focused website.",
+
+        logo:
+          "media/fly remote.png",
+
+        live: true,
+
+        link:
+          "https://fly-remote-desktop.web.app/"
+      },
+
+
+      {
+        name: "MULTIPLE USER CANVAS",
+
+        description:
+          "A collaborative multi-user canvas application.",
+
+        logo:
+          "media/multiusercanva.png",
+
+        live: true,
+
+        link:
+          "https://multiplecanva.netlify.app/"
+      },
+
+
+      {
+        name: "BrainX",
+
+        description:
+          "An interactive web project.",
+
+        logo:
+          "media/brainx.png",
+
+        live: false,
+
+        link:
+          "https://github.com/ogakashog/BrainX"
+      },
+
+
+      {
+        name: "WIFI MONITORING DASHBOARD",
+
+        description:
+          "A real-time WiFi monitoring dashboard.",
+
+        logo:
+          "media/wifi.png",
+
+        live: false,
+
+        link:
+          "https://github.com/ogakashog/wifi-monitoring-dashboad"
+      }
+
+    ];
+
+
+    /* =================================
+       SHOW PROJECTS
+    ================================= */
+
+    function showProjects(type) {
+
+      const projectContainer =
+        document.getElementById("projects");
+
+
+      const appsTab =
+        document.getElementById("appsTab");
+
+
+      const websitesTab =
+        document.getElementById("websitesTab");
+
+
+      const projectList =
+        type === "apps"
+          ? apps
+          : websites;
+
+
+      projectContainer.innerHTML = "";
+
+
+      /* =================================
+         CREATE PROJECT CARDS
+      ================================= */
+
+      projectList.forEach(
+        (project, index) => {
+
+          const card =
+            document.createElement("a");
+
+
+          card.className =
+            "project-card";
+
+
+          card.href =
+            project.link;
+
+
+          card.target =
+            "_blank";
+
+
+          card.rel =
+            "noopener noreferrer";
+
+
+          /* =================================
+             BADGE
+          ================================= */
+
+          let badge = "";
+
+
+          /*
+             APPS
+             Google Play icon on TOP LEFT
+          */
+
+          if (
+            type === "apps" &&
+            project.playStore
+          ) {
+
+            badge = `
+
+              <div
+                class="play-store-badge">
+
+                <img
+                  src="${project.playStore}"
+                  alt="Google Play"
+                >
+
+              </div>
+
+            `;
+
+          }
+
+
+          /*
+             WEBSITES
+             LIVE badge on TOP LEFT
+          */
+
+          if (
+            type === "websites" &&
+            project.live
+          ) {
+
+            badge = `
+
+              <div
+                class="live-badge">
+
+                <span
+                  class="live-dot">
+                </span>
+
+                LIVE
+
+              </div>
+
+            `;
+
+          }
+
+
+          /* =================================
+             CARD HTML
+          ================================= */
+
+          card.innerHTML = `
+
+            ${badge}
+
+            <img
+              class="project-logo"
+              src="${project.logo}"
+              alt="${project.name} logo"
+            >
+
+            <div
+              class="project-number">
+
+              ${index + 1}${getOrdinal(index + 1)} project
+
+            </div>
+
+            <h2>
+              ${project.name}
+            </h2>
+
+            <p>
+              ${project.description}
+            </p>
+
+          `;
+
+
+          projectContainer.appendChild(
+            card
+          );
+
+        }
+      );
+
+
+      /* =================================
+         ACTIVE TAB
+      ================================= */
+
+      appsTab.classList.remove(
+        "active"
+      );
+
+
+      websitesTab.classList.remove(
+        "active"
+      );
+
+
+      if (type === "apps") {
+
+        appsTab.classList.add(
+          "active"
+        );
+
+      }
+
+      else {
+
+        websitesTab.classList.add(
+          "active"
+        );
+
+      }
+
+    }
+
+
+    /* =================================
+       ORDINAL NUMBER
+    ================================= */
+
+    function getOrdinal(number) {
+
+      if (
+        number % 100 >= 11 &&
+        number % 100 <= 13
+      ) {
+
+        return "th";
+
+      }
+
+
+      switch (number % 10) {
+
+        case 1:
+          return "st";
+
+        case 2:
+          return "nd";
+
+        case 3:
+          return "rd";
+
+        default:
+          return "th";
+
+      }
+
+    }
+
+
+    /* =================================
+       DEFAULT = APPS
+    ================================= */
+
+    showProjects("apps");
+
+  </script>
+
+
+</body>
+
+</html>

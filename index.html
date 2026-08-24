@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>WEBOG</title>
+
+  <link rel="icon" type="image/png" href="media/webog logo.png">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+  <style>
+
+    /* =========================================================
+       WEBOG AI — PROFESSIONAL CHATBOX
+    ========================================================= */
+
+    .chat-box {
+      display: none;
+      position: fixed;
+      right: 28px;
+      bottom: 28px;
+      width: 390px;
+      height: 600px;
+      background: rgba(8, 11, 18, 0.97);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 24px;
+      overflow: hidden;
+      z-index: 99999;
+      box-shadow:
+        0 35px 100px rgba(0,0,0,.72),
+        0 0 0 1px rgba(255,255,255,.025) inset;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      animation: webogChatIn .42s cubic-bezier(.16,1,.3,1);
+    }
+
+    .chat-box::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      top: -150px;
+      left: -80px;
+      background: radial-gradient(circle, rgba(77,122,255,.13), transparent 68%);
+      filter: blur(12px);
+      pointer-events: none;
+    }
+
+    .chat-box::after {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      right: -120px;
+      bottom: 90px;
+      background: radial-gradient(circle, rgba(151,65,255,.11), transparent 68%);
+      filter: blur(16px);
+      pointer-events: none;
+    }
+
+    @keyframes webogChatIn {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Header */
+    .ai-header {
+      height: 78px;
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 5;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(
+        180deg,
+        rgba(255,255,255,.035),
+        rgba(255,255,255,0)
+      );
+    }
+
+    .ai-identity {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* WEBOG logo */
+    .ai-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 1px solid rgba(255,255,255,.22);
+      background: #05070b;
+      box-shadow:
+        0 0 0 4px rgba(255,255,255,.025),
+        0 0 24px rgba(91,110,255,.18);
+      animation: webogLogoFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes webogLogoFloat {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-2px); }
+    }
+
+    .ai-name {
+      font-size: 15px;
+      font-weight: 650;
+      letter-spacing: .4px;
+      line-height: 1.2;
+    }
+
+    .ai-subtitle {
+      margin-top: 4px;
+      font-size: 10px;
+      color: rgba(255,255,255,.46);
+      letter-spacing: .2px;
+    }
+
+    .ai-online {
+      margin-top: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 8px;
+      letter-spacing: 1.5px;
+      color: rgba(255,255,255,.48);
+    }
+
+    .ai-online i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #48f59a;
+      box-shadow: 0 0 10px rgba(72,245,154,.9);
+      animation: webogOnline 1.7s ease-in-out infinite;
+    }
+
+    @keyframes webogOnline {
+      0%,100% { opacity: .45; transform: scale(.9); }
+      50% { opacity: 1; transform: scale(1.15); }
+    }
+
+    .ai-close {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.035);
+      color: rgba(255,255,255,.65);
+      border-radius: 10px;
+      font-size: 21px;
+      line-height: 1;
+      cursor: pointer;
+      transition: .25s ease;
+    }
+
+    .ai-close:hover {
+      color: #fff;
+      background: rgba(255,255,255,.09);
+      transform: rotate(90deg);
+    }
+
+    /* Chat body */
+    .chat-body {
+      height: 400px;
+      padding: 18px 17px 12px;
+      overflow-y: auto;
+      position: relative;
+      z-index: 2;
+      scroll-behavior: smooth;
+    }
+
+    .chat-body::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .chat-body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .chat-body::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,.13);
+      border-radius: 20px;
+    }
+
+    /* Welcome */
+    .ai-welcome {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 18px;
+      animation: webogMessageIn .45s ease;
+    }
+
+    .bot-avatar {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.16);
+      background: #05070b;
+      box-shadow: 0 0 16px rgba(90,110,255,.15);
+    }
+
+    .welcome-bubble {
+      max-width: 285px;
+      padding: 14px 15px;
+      border-radius: 16px 16px 16px 5px;
+      background: linear-gradient(
+        145deg,
+        rgba(31,36,47,.95),
+        rgba(18,22,30,.94)
+      );
+      border: 1px solid rgba(255,255,255,.09);
+      box-shadow: 0 10px 30px rgba(0,0,0,.18);
+    }
+
+    .welcome-title {
+      font-size: 14px;
+      font-weight: 550;
+      margin-bottom: 7px;
+    }
+
+    .welcome-text {
+      font-size: 11px;
+      line-height: 1.6;
+      color: rgba(255,255,255,.53);
+    }
+
+    .welcome-time {
+      margin-top: 9px;
+      font-size: 8px;
+      color: rgba(255,255,255,.25);
+    }
+
+    /* Quick actions */
+    .quick-title {
+      margin: 5px 0 9px 44px;
+      font-size: 8px;
+      letter-spacing: 1.5px;
+      color: rgba(255,255,255,.28);
+      text-transform: uppercase;
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-left: 44px;
+      margin-bottom: 14px;
+    }
+
+    .quick-actions button {
+      min-height: 42px;
+      padding: 0 11px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 11px;
+      background: rgba(255,255,255,.035);
+      color: rgba(255,255,255,.62);
+      font-size: 9px;
+      text-align: left;
+      cursor: pointer;
+      transition: .25s ease;
+    }
+
+    .quick-actions button span {
+      width: 23px;
+      height: 23px;
+      display: grid;
+      place-items: center;
+      border-radius: 7px;
+      color: #fff;
+      background: linear-gradient(135deg, #4d73ff, #9654ff);
+      box-shadow: 0 4px 14px rgba(92,92,255,.2);
+    }
+
+    .quick-actions button:hover {
+      color: #fff;
+      border-color: rgba(124,139,255,.4);
+      background: rgba(90,100,255,.09);
+      transform: translateY(-2px);
+    }
+
+    /* Messages */
+    .bot-message,
+    .user-message {
+      max-width: 78%;
+      padding: 11px 13px;
+      margin: 8px 0;
+      border-radius: 15px;
+      font-size: 11.5px;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      animation: webogMessageIn .28s ease;
+    }
+
+    @keyframes webogMessageIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .bot-message {
+      background: linear-gradient(
+        145deg,
+        rgba(30,35,46,.95),
+        rgba(18,22,30,.94)
+      );
+      border: 1px solid rgba(255,255,255,.075);
+      color: rgba(255,255,255,.78);
+      border-bottom-left-radius: 5px;
+    }
+
+    .user-message {
+      margin-left: auto;
+      background: linear-gradient(135deg, #476fe8, #7b42db);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #fff;
+      border-bottom-right-radius: 5px;
+      box-shadow: 0 8px 24px rgba(73,77,190,.18);
+    }
+
+    /* Typing */
+    .typing {
+      width: 48px;
+      padding: 9px !important;
+      text-align: center;
+      font-size: 0 !important;
+    }
+
+    .typing::after {
+      content: "•••";
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: rgba(255,255,255,.55);
+      animation: webogTyping 1s infinite;
+    }
+
+    @keyframes webogTyping {
+      0%,100% { opacity: .25; }
+      50% { opacity: 1; }
+    }
+
+    /* Input */
+    .ai-input-wrap {
+      position: absolute;
+      left: 15px;
+      right: 15px;
+      bottom: 43px;
+      z-index: 5;
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 15px;
+      background: rgba(19,23,31,.96);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 14px 35px rgba(0,0,0,.35);
+      transition: .25s ease;
+    }
+
+    .ai-input-wrap:focus-within {
+      border-color: rgba(117,137,255,.38);
+      box-shadow:
+        0 14px 35px rgba(0,0,0,.35),
+        0 0 25px rgba(93,100,255,.07);
+    }
+
+    .ai-input-wrap input {
+      flex: 1;
+      height: 40px;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: #fff;
+      padding: 0 11px;
+      font-size: 11px;
+    }
+
+    .ai-input-wrap input::placeholder {
+      color: rgba(255,255,255,.27);
+    }
+
+    .ai-send {
+      width: 40px;
+      height: 40px;
+      border: 0;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #4b72ef, #873fe2);
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(87,70,220,.28);
+      transition: .25s ease;
+    }
+
+    .ai-send span {
+      display: block;
+      font-size: 17px;
+      transition: .25s ease;
+    }
+
+    .ai-send:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.12);
+    }
+
+    .ai-send:hover span {
+      transform: translate(2px,-2px);
+    }
+
+    .ai-send:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Footer */
+    .ai-footer {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 13px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      font-size: 7px;
+      letter-spacing: 1.5px;
+      color: rgba(255,255,255,.20);
+      z-index: 4;
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .chat-box {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        width: auto;
+        height: min(600px, calc(100vh - 24px));
+        border-radius: 20px;
+      }
+
+      .chat-body {
+        height: calc(100% - 200px);
+      }
+
+      .quick-actions {
+        margin-left: 0;
+      }
+
+      .quick-title {
+        margin-left: 0;
+      }
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================================================
+       NAVIGATION
+  ========================================================= -->
+
+  <nav class="top-nav">
+
+    <a href="work.html">
+      WORK
+    </a>
+
+    <a href="about.html">
+      ABOUT
+    </a>
+
+    <a href="contact.html">
+      CONTACT
+    </a>
+
+  </nav>
+
+
+  <!-- =========================================================
+       SLIDER
+  ========================================================= -->
+
+  <div class="slider">
+
+
+    <!-- SLIDE 1 -->
+
+    <div class="slide active">
+
+      <video
+        src="media/video4.mp4"
+        autoplay
+        muted
+        loop
+        playsinline>
+      </video>
+
+
+      <div class="overlay">
+
+        <h1>
+          from<br>
+          logic to life
+        </h1>
+
+
+        <p>
+          SYSTEMS / APIS / DATA / ARCHITECTURE
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- SLIDE 2 -->
+
+    <div class="slide">
+
+      <video
+        src="media/video6.mp4"
+        autoplay
+        muted
+        loop
+        playsinline>
+      </video>
+
+
+      <div class="overlay">
+
+        <h1>
+          where<br>
+          ideas live
+        </h1>
+
+
+        <p>
+          INTERFACES / EXPERIENCE / INTERACTION / WEB
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- SLIDE 3 -->
+
+    <div class="slide">
+
+      <video
+        src="media/video5.mp4"
+        autoplay
+        muted
+        loop
+        playsinline>
+      </video>
+
+
+      <div class="overlay">
+
+        <h1>
+          made<br>
+          to move
+        </h1>
+
+
+        <p>
+          MOBILE / TOUCH / MOTION / EXPERIENCE
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       ARROWS
+  ========================================================= -->
+
+  <div class="arrows">
+
+    <button class="nav prev">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+
+    <button class="nav next">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+
+  </div>
+
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================= -->
+
+  <footer>
+
+    <a
+      href="#"
+      id="chatToggle"
+      class="cta">
+
+      LET’S TALK
+
+    </a>
+
+
+    <div class="socials">
+
+      <a
+        href="https://linkedin.com/in/akash-og-76699627b"
+        target="_blank">
+
+        <i class="fab fa-linkedin"></i>
+
+      </a>
+
+
+      <a
+        href="https://instagram.com/og_xolo"
+        target="_blank">
+
+        <i class="fab fa-instagram"></i>
+
+      </a>
+
+
+      <a
+        href="https://github.com/ogakashog"
+        target="_blank">
+
+        <i class="fab fa-github"></i>
+
+      </a>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================================================
+       WEBOG AI
+  ========================================================= -->
+
+  <div id="chatBox" class="chat-box">
+
+    <!-- HEADER -->
+    <div class="ai-header">
+
+      <div class="ai-identity">
+
+        <img
+          src="media/webog logo.png"
+          alt="WEBOG"
+          class="ai-logo">
+
+        <div>
+          <div class="ai-name">WEBOG AI</div>
+          <div class="ai-subtitle">Your Digital Assistant</div>
+
+          <div class="ai-online">
+            <i></i>
+            ONLINE
+          </div>
+        </div>
+
+      </div>
+
+      <button
+        id="closeChat"
+        class="ai-close"
+        aria-label="Close chat">
+        ×
+      </button>
+
+    </div>
+
+
+    <!-- CHAT BODY -->
+    <div class="chat-body" id="chatBody">
+
+      <!-- Welcome -->
+      <div class="ai-welcome">
+
+        <img
+          src="media/webog logo.png"
+          alt="WEBOG AI"
+          class="bot-avatar">
+
+        <div class="welcome-bubble">
+
+          <div class="welcome-title">
+            hey explorer! 👋
+          </div>
+
+          <div class="welcome-text">
+            I'm WEBOG AI. Ask me about
+            the website, projects, services,
+            or anything you want to know.
+          </div>
+
+          <div class="welcome-time">
+            WEBOG AI • NOW
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Quick Actions -->
+      <div class="quick-title">
+        Explore
+      </div>
+
+      <div class="quick-actions">
+
+        <button onclick="quickMessage('Tell me about WEBOG')">
+          <span>✦</span>
+          About WEBOG
+        </button>
+
+        <button onclick="quickMessage('Tell me about OG')">
+          <span>◉</span>
+          About OG
+        </button>
+
+        <button onclick="quickMessage('Show me the projects')">
+          <span>◇</span>
+          Projects
+        </button>
+
+        <button onclick="quickMessage('What services do you offer?')">
+          <span>↗</span>
+          Services
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- INPUT -->
+    <div class="ai-input-wrap">
+
+      <input
+        type="text"
+        id="userInput"
+        placeholder="Type your message..."
+        autocomplete="off">
+
+      <button
+        id="sendBtn"
+        class="ai-send"
+        aria-label="Send message">
+
+        <span>➤</span>
+
+      </button>
+
+    </div>
+
+
+    <!-- FOOTER -->
+    <div class="ai-footer">
+      <span>WEBOG AI</span>
+      <span>•</span>
+      <span>v1.0.0</span>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       EXISTING SCRIPT
+  ========================================================= -->
+
+  <script src="script.js"></script>
+
+
+  <!-- =========================================================
+       WEBOG AI SCRIPT
+  ========================================================= -->
+
+  <script>
+
+
+    /* =========================================================
+       ELEMENTS
+    ========================================================= */
+
+    const chatToggle =
+      document.getElementById(
+        "chatToggle"
+      );
+
+
+    const chatBox =
+      document.getElementById(
+        "chatBox"
+      );
+
+
+    const closeChat =
+      document.getElementById(
+        "closeChat"
+      );
+
+
+    const sendBtn =
+      document.getElementById(
+        "sendBtn"
+      );
+
+
+    const userInput =
+      document.getElementById(
+        "userInput"
+      );
+
+
+    const chatBody =
+      document.getElementById(
+        "chatBody"
+      );
+
+
+    /* =========================================================
+       API URL
+
+       LOCAL:
+       http://localhost:3000/api/webog-ai
+
+       NETLIFY:
+       /.netlify/functions/webog-ai
+    ========================================================= */
+
+    const AI_API_URL =
+
+      (
+        window.location.hostname === "localhost" ||
+
+        window.location.hostname === "127.0.0.1"
+
+      )
+
+        ?
+
+        "http://localhost:3000/api/webog-ai"
+
+        :
+
+        "/.netlify/functions/webog-ai";
+
+
+    /* =========================================================
+       OPEN CHAT
+    ========================================================= */
+
+    chatToggle.addEventListener(
+      "click",
+      function(e) {
+
+        e.preventDefault();
+
+        chatBox.style.display =
+          "block";
+
+        userInput.focus();
+
+      }
+    );
+
+
+    /* =========================================================
+       CLOSE CHAT
+    ========================================================= */
+
+    closeChat.addEventListener(
+      "click",
+      function() {
+
+        chatBox.style.display =
+          "none";
+
+      }
+    );
+
+
+    /* =========================================================
+       SESSION
+    ========================================================= */
+
+    let sessionId =
+      localStorage.getItem(
+        "webog_ai_session"
+      );
+
+
+    if (!sessionId) {
+
+      sessionId =
+        "webog-" +
+        crypto.randomUUID();
+
+
+      localStorage.setItem(
+        "webog_ai_session",
+        sessionId
+      );
+
+    }
+
+
+    /* =========================================================
+       QUICK MESSAGE
+    ========================================================= */
+
+    function quickMessage(message) {
+
+      userInput.value =
+        message;
+
+      sendMessage();
+
+    }
+
+
+    /* =========================================================
+       SEND MESSAGE
+    ========================================================= */
+
+    async function sendMessage() {
+
+
+      const msg =
+        userInput.value.trim();
+
+
+      if (!msg) {
+
+        return;
+
+      }
+
+
+      /* USER MESSAGE */
+
+      const userMsg =
+        document.createElement(
+          "div"
+        );
+
+
+      userMsg.classList.add(
+        "user-message"
+      );
+
+
+      userMsg.innerText =
+        msg;
+
+
+      chatBody.appendChild(
+        userMsg
+      );
+
+
+      userInput.value =
+        "";
+
+
+      chatBody.scrollTop =
+        chatBody.scrollHeight;
+
+
+      /* TYPING */
+
+      const typing =
+        document.createElement(
+          "div"
+        );
+
+
+      typing.classList.add(
+        "bot-message",
+        "typing"
+      );
+
+
+      typing.innerText =
+        "thinking";
+
+
+      chatBody.appendChild(
+        typing
+      );
+
+
+      chatBody.scrollTop =
+        chatBody.scrollHeight;
+
+
+      sendBtn.disabled =
+        true;
+
+
+      try {
+
+
+        /* CALL LYZR BACKEND */
+
+        const response =
+          await fetch(
+            AI_API_URL,
+            {
+
+              method:
+                "POST",
+
+              headers: {
+
+                "Content-Type":
+                  "application/json"
+
+              },
+
+              body:
+                JSON.stringify({
+
+                  message:
+                    msg,
+
+                  session_id:
+                    sessionId
+
+                })
+
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        typing.remove();
+
+
+        /* ERROR */
+
+        if (!response.ok) {
+
+
+          const errorMsg =
+            document.createElement(
+              "div"
+            );
+
+
+          errorMsg.classList.add(
+            "bot-message"
+          );
+
+
+          errorMsg.innerText =
+            "something went wrong.\ntry again in a moment.";
+
+
+          chatBody.appendChild(
+            errorMsg
+          );
+
+
+          chatBody.scrollTop =
+            chatBody.scrollHeight;
+
+
+          return;
+
+        }
+
+
+        /* AI RESPONSE */
+
+        const botMsg =
+          document.createElement(
+            "div"
+          );
+
+
+        botMsg.classList.add(
+          "bot-message"
+        );
+
+
+        botMsg.innerText =
+          data.response ||
+          "i'm quiet for a moment...";
+
+
+        chatBody.appendChild(
+          botMsg
+        );
+
+
+        chatBody.scrollTop =
+          chatBody.scrollHeight;
+
+
+      }
+
+      catch(error) {
+
+
+        console.error(
+          "WEBOG AI ERROR:",
+          error
+        );
+
+
+        typing.remove();
+
+
+        const errorMsg =
+          document.createElement(
+            "div"
+          );
+
+
+        errorMsg.classList.add(
+          "bot-message"
+        );
+
+
+        errorMsg.innerText =
+          "can't reach WEBOG AI right now.";
+
+
+        chatBody.appendChild(
+          errorMsg
+        );
+
+
+        chatBody.scrollTop =
+          chatBody.scrollHeight;
+
+      }
+
+
+      finally {
+
+        sendBtn.disabled =
+          false;
+
+        userInput.focus();
+
+      }
+
+    }
+
+
+    /* =========================================================
+       SEND BUTTON
+    ========================================================= */
+
+    sendBtn.addEventListener(
+      "click",
+      sendMessage
+    );
+
+
+    /* =========================================================
+       ENTER
+    ========================================================= */
+
+    userInput.addEventListener(
+      "keydown",
+      function(e) {
+
+        if (
+          e.key === "Enter"
+        ) {
+
+          e.preventDefault();
+
+          sendMessage();
+
+        }
+
+      }
+    );
+
+
+  </script>
+
+
+</body>
+
+</html>

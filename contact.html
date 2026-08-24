@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+  <title>Contact — WEBOG</title>
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="media/webog logo.png">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+  <style>
+
+    /* =========================================
+       RESET
+    ========================================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    /* =========================================
+       BODY
+    ========================================= */
+
+    body {
+
+      width: 100%;
+      min-height: 100vh;
+
+      overflow: hidden;
+
+      font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+      color: #fff;
+
+      background: #000;
+    }
+
+
+    /* =========================================
+       VIDEO BACKGROUND
+    ========================================= */
+
+    .video-bg {
+
+      position: fixed;
+
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      z-index: -5;
+
+      filter:
+        brightness(0.42)
+        contrast(1.05);
+    }
+
+
+    /* =========================================
+       VIDEO OVERLAY
+    ========================================= */
+
+    .video-overlay {
+
+      position: fixed;
+
+      inset: 0;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(0,0,0,0.78),
+          rgba(0,0,0,0.25),
+          rgba(0,0,0,0.72)
+        );
+
+      z-index: -4;
+    }
+
+
+    /* =========================================
+       BACKGROUND GLOW
+    ========================================= */
+
+    .glow {
+
+      position: fixed;
+
+      width: 420px;
+      height: 420px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,0.045);
+
+      filter: blur(100px);
+
+      pointer-events: none;
+
+      z-index: -3;
+
+      animation:
+        glowMove 8s ease-in-out infinite;
+    }
+
+
+    .glow.one {
+
+      top: -180px;
+      left: -120px;
+    }
+
+
+    .glow.two {
+
+      bottom: -200px;
+      right: -120px;
+
+      animation-delay: -4s;
+    }
+
+
+    @keyframes glowMove {
+
+      0%,
+      100% {
+        transform: translate(0,0);
+      }
+
+      50% {
+        transform: translate(40px,-30px);
+      }
+
+    }
+
+
+    /* =========================================
+       PAGE
+    ========================================= */
+
+    .page {
+
+      width: 100%;
+      height: 100vh;
+
+      display: grid;
+
+      grid-template-columns:
+        42% 58%;
+    }
+
+
+    /* =========================================
+       LEFT SIDE
+    ========================================= */
+
+    .left {
+
+      height: 100%;
+
+      padding: 45px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content:
+        space-between;
+
+      border-right:
+        1px solid
+        rgba(255,255,255,0.1);
+    }
+
+
+    /* =========================================
+       BRAND
+    ========================================= */
+
+    .brand {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+    }
+
+
+    .brand img {
+
+      width: 42px;
+      height: 42px;
+
+      object-fit: contain;
+
+      filter:
+        drop-shadow(
+          0 0 12px
+          rgba(255,255,255,0.35)
+        );
+    }
+
+
+    .brand-name {
+
+      font-size: 12px;
+
+      letter-spacing: 5px;
+
+      color:
+        rgba(255,255,255,0.7);
+    }
+
+
+    /* =========================================
+       LEFT HERO
+    ========================================= */
+
+    .left-content {
+
+      max-width: 450px;
+    }
+
+
+    .eyebrow {
+
+      font-size: 10px;
+
+      letter-spacing: 4px;
+
+      color:
+        rgba(255,255,255,0.38);
+
+      margin-bottom: 18px;
+    }
+
+
+    .left-content h1 {
+
+      font-size:
+        clamp(60px, 8vw, 105px);
+
+      line-height: 0.85;
+
+      font-weight: 400;
+
+      letter-spacing: -6px;
+
+      margin-bottom: 30px;
+    }
+
+
+    .left-content h1 span {
+
+      color:
+        rgba(255,255,255,0.25);
+    }
+
+
+    .left-description {
+
+      max-width: 380px;
+
+      font-size: 13px;
+
+      line-height: 1.8;
+
+      color:
+        rgba(255,255,255,0.52);
+    }
+
+
+    /* =========================================
+       AVAILABILITY
+    ========================================= */
+
+    .availability {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 9px;
+
+      margin-top: 25px;
+
+      padding:
+        8px 13px;
+
+      border-radius: 30px;
+
+      border:
+        1px solid
+        rgba(69,255,135,0.2);
+
+      background:
+        rgba(69,255,135,0.035);
+
+      font-size: 9px;
+
+      letter-spacing: 2px;
+
+      color:
+        rgba(255,255,255,0.5);
+    }
+
+
+    .availability-dot {
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: #45ff87;
+
+      box-shadow:
+        0 0 10px
+        rgba(69,255,135,0.8);
+
+      animation:
+        pulse 1.5s infinite;
+    }
+
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: .4;
+        transform: scale(.8);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.15);
+      }
+
+    }
+
+
+    /* =========================================
+       SOCIAL
+    ========================================= */
+
+    .social-area {
+
+      border-top:
+        1px solid
+        rgba(255,255,255,0.1);
+
+      padding-top: 20px;
+    }
+
+
+    .social-label {
+
+      font-size: 9px;
+
+      letter-spacing: 3px;
+
+      color:
+        rgba(255,255,255,0.3);
+
+      margin-bottom: 14px;
+    }
+
+
+    .social-icons {
+
+      display: flex;
+
+      gap: 9px;
+    }
+
+
+    .social-icons a {
+
+      width: 37px;
+      height: 37px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+
+      color:
+        rgba(255,255,255,0.55);
+
+      background:
+        rgba(255,255,255,0.035);
+
+      border:
+        1px solid
+        rgba(255,255,255,0.11);
+
+      text-decoration: none;
+
+      transition:
+        .3s ease;
+    }
+
+
+    .social-icons a:hover {
+
+      color: #fff;
+
+      background:
+        rgba(255,255,255,0.1);
+
+      border-color:
+        rgba(255,255,255,0.3);
+
+      transform:
+        translateY(-4px);
+    }
+
+
+    /* =========================================
+       RIGHT SIDE
+    ========================================= */
+
+    .right {
+
+      height: 100%;
+
+      padding: 45px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content:
+        center;
+    }
+
+
+    /* =========================================
+       FORM HEADER
+    ========================================= */
+
+    .form-header {
+
+      margin-bottom: 28px;
+    }
+
+
+    .form-number {
+
+      font-size: 9px;
+
+      letter-spacing: 4px;
+
+      color:
+        rgba(255,255,255,0.35);
+
+      margin-bottom: 12px;
+    }
+
+
+    .form-header h2 {
+
+      font-size:
+        clamp(35px, 4vw, 55px);
+
+      font-weight: 400;
+
+      letter-spacing: -2px;
+
+      margin-bottom: 12px;
+    }
+
+
+    .form-header p {
+
+      font-size: 12px;
+
+      color:
+        rgba(255,255,255,0.45);
+
+      max-width: 500px;
+
+      line-height: 1.6;
+    }
+
+
+    /* =========================================
+       FORM
+    ========================================= */
+
+    .contact-form {
+
+      width: 100%;
+
+      max-width: 650px;
+
+      padding: 30px;
+
+      border-radius: 20px;
+
+      background:
+        rgba(255,255,255,0.035);
+
+      border:
+        1px solid
+        rgba(255,255,255,0.13);
+
+      backdrop-filter:
+        blur(18px);
+
+      -webkit-backdrop-filter:
+        blur(18px);
+
+      box-shadow:
+        0 25px 70px
+        rgba(0,0,0,0.35);
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+
+    /* =========================================
+       FORM SHINE
+    ========================================= */
+
+    .contact-form::before {
+
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      left: -100%;
+
+      width: 50%;
+      height: 100%;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255,255,255,0.06),
+          transparent
+        );
+
+      transform:
+        skewX(-20deg);
+
+      animation:
+        formShine 8s ease-in-out infinite;
+
+      pointer-events: none;
+    }
+
+
+    @keyframes formShine {
+
+      0% {
+        left: -100%;
+      }
+
+      45% {
+        left: 130%;
+      }
+
+      100% {
+        left: 130%;
+      }
+
+    }
+
+
+    /* =========================================
+       INPUT ROW
+    ========================================= */
+
+    .input-row {
+
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 12px;
+    }
+
+
+    /* =========================================
+       INPUT GROUP
+    ========================================= */
+
+    .input-group {
+
+      position: relative;
+
+      margin-bottom: 12px;
+    }
+
+
+    .input-group label {
+
+      display: block;
+
+      font-size: 9px;
+
+      letter-spacing: 2px;
+
+      color:
+        rgba(255,255,255,0.35);
+
+      margin-bottom: 7px;
+
+      text-transform:
+        uppercase;
+    }
+
+
+    .input-group input,
+    .input-group textarea {
+
+      width: 100%;
+
+      border: none;
+
+      outline: none;
+
+      padding:
+        13px 14px;
+
+      border-radius: 10px;
+
+      background:
+        rgba(255,255,255,0.045);
+
+      border:
+        1px solid
+        rgba(255,255,255,0.09);
+
+      color: #fff;
+
+      font-family: inherit;
+
+      font-size: 13px;
+
+      transition:
+        .3s ease;
+    }
+
+
+    .input-group textarea {
+
+      min-height: 115px;
+
+      resize: none;
+    }
+
+
+    .input-group input::placeholder,
+    .input-group textarea::placeholder {
+
+      color:
+        rgba(255,255,255,0.22);
+    }
+
+
+    .input-group input:focus,
+    .input-group textarea:focus {
+
+      background:
+        rgba(255,255,255,0.07);
+
+      border-color:
+        rgba(255,255,255,0.3);
+
+      box-shadow:
+        0 0 20px
+        rgba(255,255,255,0.035);
+    }
+
+
+    /* =========================================
+       BUTTON
+    ========================================= */
+
+    .send-button {
+
+      width: 100%;
+
+      margin-top: 5px;
+
+      padding:
+        14px 18px;
+
+      border: none;
+
+      border-radius: 10px;
+
+      background: #fff;
+
+      color: #000;
+
+      font-size: 11px;
+
+      font-weight: 600;
+
+      letter-spacing: 2px;
+
+      cursor: pointer;
+
+      position: relative;
+
+      overflow: hidden;
+
+      transition:
+        .3s ease;
+    }
+
+
+    .send-button::before {
+
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      left: -120%;
+
+      width: 100%;
+      height: 100%;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255,255,255,.6),
+          transparent
+        );
+
+      transform:
+        skewX(-20deg);
+
+      transition:
+        .5s ease;
+    }
+
+
+    .send-button:hover::before {
+
+      left: 120%;
+    }
+
+
+    .send-button:hover {
+
+      transform:
+        translateY(-2px);
+
+      box-shadow:
+        0 10px 30px
+        rgba(255,255,255,0.12);
+    }
+
+
+    /* =========================================
+       FOOTER
+    ========================================= */
+
+    .right-footer {
+
+      display: flex;
+
+      justify-content:
+        space-between;
+
+      max-width: 650px;
+
+      margin-top: 18px;
+
+      font-size: 8px;
+
+      letter-spacing: 2px;
+
+      color:
+        rgba(255,255,255,0.25);
+    }
+
+
+    /* =========================================
+       MOBILE
+    ========================================= */
+
+    @media (max-width: 850px) {
+
+      body {
+
+        overflow: auto;
+      }
+
+
+      .page {
+
+        height: auto;
+
+        min-height: 100vh;
+
+        grid-template-columns: 1fr;
+      }
+
+
+      .left {
+
+        min-height: 55vh;
+
+        padding: 30px;
+
+        border-right: none;
+
+        border-bottom:
+          1px solid
+          rgba(255,255,255,0.1);
+      }
+
+
+      .right {
+
+        min-height: 45vh;
+
+        padding: 30px;
+      }
+
+
+      .left-content {
+
+        margin-top: 40px;
+      }
+
+
+      .left-content h1 {
+
+        font-size: 70px;
+
+        letter-spacing: -4px;
+      }
+
+    }
+
+
+    @media (max-width: 550px) {
+
+      .left,
+      .right {
+
+        padding: 22px;
+      }
+
+
+      .input-row {
+
+        grid-template-columns: 1fr;
+      }
+
+
+      .contact-form {
+
+        padding: 20px;
+      }
+
+
+      .form-header h2 {
+
+        font-size: 38px;
+      }
+
+
+      .social-icons a {
+
+        width: 34px;
+        height: 34px;
+
+        font-size: 13px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================================
+       VIDEO
+  ========================================= -->
+
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    class="video-bg">
+
+    <source
+      src="media/slide2.mp4"
+      type="video/mp4">
+
+  </video>
+
+
+  <div class="video-overlay"></div>
+
+  <div class="glow one"></div>
+
+  <div class="glow two"></div>
+
+
+
+  <!-- =========================================
+       PAGE
+  ========================================= -->
+
+  <main class="page">
+
+
+    <!-- =======================================
+         LEFT
+    ======================================== -->
+
+    <section class="left">
+
+
+      <!-- BRAND -->
+
+      <div class="brand">
+
+        <img
+          src="media/webog logo.png"
+          alt="WEBOG">
+
+        <span class="brand-name">
+          WEBOG
+        </span>
+
+      </div>
+
+
+
+      <!-- CONTENT -->
+
+      <div class="left-content">
+
+        <div class="eyebrow">
+
+          CONTACT / 01
+
+        </div>
+
+
+        <h1>
+
+          Let's<br>
+
+          <span>create.</span>
+
+        </h1>
+
+
+        <p class="left-description">
+
+          Have an idea, project or something
+          interesting in mind?
+
+          <br><br>
+
+          Tell me what you're thinking.
+          Let's turn the idea into something
+          real, useful and memorable.
+
+        </p>
+
+
+        <div class="availability">
+
+          <span
+            class="availability-dot">
+          </span>
+
+          OPEN FOR NEW PROJECTS
+
+        </div>
+
+      </div>
+
+
+
+      <!-- SOCIAL -->
+
+      <div class="social-area">
+
+        <div class="social-label">
+
+          FIND ME / CONNECT
+
+        </div>
+
+
+        <div class="social-icons">
+
+
+          <a
+            href="https://linkedin.com/in/akash-og-76699627b"
+            target="_blank"
+            aria-label="LinkedIn">
+
+            <i
+              class="fab fa-linkedin-in">
+            </i>
+
+          </a>
+
+
+          <a
+            href="https://instagram.com/og_xolo"
+            target="_blank"
+            aria-label="Instagram">
+
+            <i
+              class="fab fa-instagram">
+            </i>
+
+          </a>
+
+
+          <a
+            href="https://github.com/ogakashog"
+            target="_blank"
+            aria-label="GitHub">
+
+            <i
+              class="fab fa-github">
+            </i>
+
+          </a>
+
+
+          <a
+            href="https://wa.me/916385769141"
+            target="_blank"
+            aria-label="WhatsApp">
+
+            <i
+              class="fab fa-whatsapp">
+            </i>
+
+          </a>
+
+
+          <a
+            href="#"
+            aria-label="Twitter">
+
+            <i
+              class="fab fa-x-twitter">
+            </i>
+
+          </a>
+
+
+          <a
+            href="#"
+            aria-label="YouTube">
+
+            <i
+              class="fab fa-youtube">
+            </i>
+
+          </a>
+
+
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- =======================================
+         RIGHT
+    ======================================== -->
+
+    <section class="right">
+
+
+      <!-- HEADER -->
+
+      <div class="form-header">
+
+        <div class="form-number">
+
+          02 — START A CONVERSATION
+
+        </div>
+
+
+        <h2>
+
+          What's on<br>
+          your mind?
+
+        </h2>
+
+
+        <p>
+
+          Send a message and I'll get back to you.
+          Your message will open directly in WhatsApp.
+
+        </p>
+
+      </div>
+
+
+
+      <!-- FORM -->
+
+      <form
+        class="contact-form"
+        id="whatsappForm">
+
+
+        <!-- NAME + EMAIL -->
+
+        <div class="input-row">
+
+
+          <div class="input-group">
+
+            <label for="name">
+              Name
+            </label>
+
+            <input
+              type="text"
+              id="name"
+              placeholder="Your name"
+              required>
+
+          </div>
+
+
+          <div class="input-group">
+
+            <label for="email">
+              Email
+            </label>
+
+            <input
+              type="email"
+              id="email"
+              placeholder="you@example.com"
+              required>
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- SUBJECT -->
+
+        <div class="input-group">
+
+          <label for="subject">
+            Subject
+          </label>
+
+          <input
+            type="text"
+            id="subject"
+            placeholder="What's this about?"
+            required>
+
+        </div>
+
+
+
+        <!-- MESSAGE -->
+
+        <div class="input-group">
+
+          <label for="message">
+            Message
+          </label>
+
+          <textarea
+            id="message"
+            placeholder="Tell me about your idea..."
+            required>
+          </textarea>
+
+        </div>
+
+
+
+        <!-- BUTTON -->
+
+        <button
+          type="submit"
+          class="send-button">
+
+          SEND VIA WHATSAPP
+          &nbsp; →
+          
+        </button>
+
+
+      </form>
+
+
+
+      <!-- FOOTER -->
+
+      <div class="right-footer">
+
+        <span>
+          RESPONSE VIA WHATSAPP
+        </span>
+
+        <span>
+          WEBOG / 2026
+        </span>
+
+      </div>
+
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- =========================================
+       WHATSAPP SCRIPT
+  ========================================= -->
+
+  <script>
+
+    document
+      .getElementById("whatsappForm")
+      .addEventListener(
+        "submit",
+        function (e) {
+
+          e.preventDefault();
+
+
+          const name =
+            document
+              .getElementById("name")
+              .value
+              .trim();
+
+
+          const email =
+            document
+              .getElementById("email")
+              .value
+              .trim();
+
+
+          const subject =
+            document
+              .getElementById("subject")
+              .value
+              .trim();
+
+
+          const message =
+            document
+              .getElementById("message")
+              .value
+              .trim();
+
+
+          const phone =
+            "916385769141";
+
+
+          const whatsappMessage =
+`Hello OG,
+
+My name is ${name}.
+
+Email: ${email}
+
+Subject: ${subject}
+
+Message:
+${message}`;
+
+
+          const url =
+            `https://wa.me/${phone}?text=${
+              encodeURIComponent(
+                whatsappMessage
+              )
+            }`;
+
+
+          window.open(
+            url,
+            "_blank"
+          );
+
+        });
+
+  </script>
+
+
+</body>
+
+</html>
